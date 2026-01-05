@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Daftar Laptop | SPK TOPSIS</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body onload="checkAuth('user'); loadLaptops()">
+
+<div class="container">
+
+  <header class="header">
+    <div>
+      <h2>💻 Daftar Laptop</h2>
+      <p class="subtitle">Data Alternatif TOPSIS</p>
+    </div>
+    <a href="dashboard.html" class="btn btn-outline">Kembali</a>
+  </header>
+
+  <div class="card">
+    <table>
+      <thead>
+        <tr>
+          <th>Nama</th>
+          <th>Harga</th>
+          <th>RAM</th>
+          <th>Storage</th>
+          <th>Processor</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody id="laptopTable"></tbody>
+    </table>
+  </div>
+
+</div>
+
+<script src="js/auth.js"></script>
+<script>
+const LAPTOP_API = 'http://localhost:3000/api/laptops';
+
+function loadLaptops() {
+  fetch(LAPTOP_API, { headers: authHeader() })
+    .then(res => res.json())
+    .then(data => {
+      let html = '';
+      data.forEach(l => {
+        html += `
+          <tr>
+            <td>${l.name}</td>
+            <td>Rp ${l.price.toLocaleString()}</td>
+            <td>${l.ram} GB</td>
+            <td>${l.storage} GB</td>
+            <td>${l.processor}</td>
+            <td>
+              <button class="btn btn-danger" onclick="deleteLaptop(${l.id})">Hapus</button>
+            </td>
+          </tr>
+        `;
+      });
+      document.getElementById('laptopTable').innerHTML = html;
+    });
+}
+
+function deleteLaptop(id) {
+  if (!confirm('Hapus laptop ini?')) return;
+  fetch(`${LAPTOP_API}/${id}`, {
+    method: 'DELETE',
+    headers: authHeader()
+  }).then(() => loadLaptops());
+}
+</script>
+
+</body>
+</html>

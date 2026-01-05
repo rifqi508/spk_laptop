@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Manajemen Kriteria | SPK TOPSIS</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body onload="checkAuth('user'); loadKriteria()">
+
+<div class="container">
+
+  <header class="header">
+    <div>
+      <h2>⚙️ Manajemen Kriteria</h2>
+      <p class="subtitle">Bobot & Jenis Kriteria TOPSIS</p>
+    </div>
+    <a href="dashboard.html" class="btn btn-outline">Kembali</a>
+  </header>
+
+  <div class="card">
+    <h3>Daftar Kriteria</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Nama</th>
+          <th>Bobot</th>
+          <th>Tipe</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody id="kriteriaTable"></tbody>
+    </table>
+  </div>
+
+</div>
+
+<script src="js/auth.js"></script>
+<script>
+const KRITERIA_API = 'http://localhost:3000/api/kriteria';
+
+function loadKriteria() {
+  fetch(KRITERIA_API, { headers: authHeader() })
+    .then(res => res.json())
+    .then(data => {
+      let html = '';
+      data.forEach(k => {
+        html += `
+          <tr>
+            <td>${k.name}</td>
+            <td>
+              <input type="number" value="${k.weight}" step="0.01"
+                onchange="updateKriteria(${k.id}, this.value, null)">
+            </td>
+            <td>
+              <select onchange="updateKriteria(${k.id}, null, this.value)">
+                <option value="benefit" ${k.type === 'benefit' ? 'selected' : ''}>Benefit</option>
+                <option value="cost" ${k.type === 'cost' ? 'selected' : ''}>Cost</option>
+              </select>
+            </td>
+            <td>
+              <button class="btn btn-primary" onclick="saveKriteria(${k.id})">Simpan</button>
+            </td>
+          </tr>
+        `;
+      });
+      document.getElementById('kriteriaTable').innerHTML = html;
+    });
+}
+
+let edited = {};
+
+function updateKriteria(id, weight, type) {
+  if (!edited[id]) edited[id] = {};
+  if (weight !== null) edited[id].weight = Number(weight);
+  if (type !== null) edited[id].type = type;
+}
+
+function saveKriteria(id) {
+  fetch(`${KRITERIA_API}/${id}`, {
+    method: 'PUT',
+    headers: authHeader(),
+    body: JSON.stringify(edited[id])
+  }).then(() => {
+    alert('Kriteria diperbarui');
+    edited[id] = null;
+  });
+}
+</script>
+
+</body>
+</html>
