@@ -1,0 +1,248 @@
+/* ===============================
+   GLOBAL RESET & THEME
+================================ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --primary: #2563eb;
+  --secondary: #1e293b;
+  --success: #16a34a;
+  --danger: #dc2626;
+  --bg: #f1f5f9;
+  --card: #ffffff;
+  --text: #0f172a;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background: linear-gradient(135deg, #e2e8f0, #f8fafc);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ===============================
+   LAYOUT
+================================ */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 30px;
+}
+
+header {
+  background: var(--primary);
+  color: white;
+  padding: 20px 30px;
+  border-radius: 14px;
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 15px 30px rgba(37,99,235,0.25);
+}
+
+header h2 {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* ===============================
+   CARD
+================================ */
+.card {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 12px 30px rgba(15,23,42,0.08);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+/* ===============================
+   FORM
+================================ */
+input, select {
+  width: 100%;
+  padding: 12px 14px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: 1px solid #cbd5f5;
+  outline: none;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+input:focus, select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.2);
+}
+
+label {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* ===============================
+   BUTTON
+================================ */
+button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+button.primary {
+  background: var(--primary);
+  color: white;
+}
+
+button.primary:hover {
+  background: #1d4ed8;
+}
+
+button.success {
+  background: var(--success);
+  color: white;
+}
+
+button.success:hover {
+  background: #15803d;
+}
+
+button.danger {
+  background: var(--danger);
+  color: white;
+}
+
+button.danger:hover {
+  background: #b91c1c;
+}
+
+button.outline {
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+}
+
+button.outline:hover {
+  background: var(--primary);
+  color: white;
+}
+
+/* ===============================
+   TABLE
+================================ */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+table th, table td {
+  padding: 12px 14px;
+  text-align: center;
+}
+
+table thead {
+  background: var(--secondary);
+  color: white;
+}
+
+table tbody tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+table tbody tr:hover {
+  background: #e0e7ff;
+}
+
+/* ===============================
+   RESULT / RANKING
+================================ */
+.result-list {
+  list-style: none;
+  margin-top: 15px;
+}
+
+.result-list li {
+  background: linear-gradient(135deg, #e0e7ff, #f8fafc);
+  padding: 14px 18px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 6px 16px rgba(15,23,42,0.08);
+}
+
+.result-list li span.rank {
+  background: var(--primary);
+  color: white;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* ===============================
+   LOGIN PAGE
+================================ */
+.login-box {
+  max-width: 420px;
+  margin: 120px auto;
+  background: var(--card);
+  padding: 35px;
+  border-radius: 18px;
+  box-shadow: 0 20px 45px rgba(15,23,42,0.15);
+}
+
+.login-box h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: var(--primary);
+}
+
+/* ===============================
+   ALERT
+================================ */
+.alert {
+  padding: 12px;
+  border-radius: 10px;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.alert.error {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.alert.success {
+  background: #dcfce7;
+  color: #166534;
+}
+
+/* ===============================
+   FOOTER
+================================ */
+footer {
+  text-align: center;
+  margin-top: 40px;
+  color: #64748b;
+  font-size: 13px;
+}
